@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Couriers Club - תוספות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Heebo', -apple-system, sans-serif;
+    color: #1A1A1A;
+    line-height: 1.55;
+    background: transparent;
+  }
+  body { overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ANNOUNCEMENT BAR */
+  .announce {
+    background: #202125;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 11px 16px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .announce strong { color: #00C2E8; }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: #fafafa;
+    padding: 28px 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .trust-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+  }
+  .trust-icon {
+    width: 48px; height: 48px;
+    background: #00C2E8;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 22px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .trust-text .t { font-weight: 700; font-size: 14px; color: #000; }
+  .trust-text .s { font-size: 12px; color: #7A7A7A; margin-top: 2px; }
+
+  /* PROMO MARQUEE */
+  .promo-strip {
+    background: linear-gradient(90deg, #202125 0%, #2a2a35 100%);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+  .promo-marquee {
+    display: inline-flex;
+    gap: 60px;
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .promo-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    padding-left: 30px;
+  }
+  .promo-item strong { color: #00C2E8; font-weight: 700; }
+
+  /* SECTION HEAD */
+  section { padding: 70px 24px; max-width: 1200px; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 45px; }
+  .section-head .eyebrow {
+    color: #00C2E8;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    color: #1A1A1A;
+  }
+  .section-head p {
+    color: #7A7A7A;
+    font-size: 16px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* BEST SELLERS */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .product-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+    border-color: transparent;
+  }
+  .product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #E5F8FD 0%, #f5f5f5 100%);
+    display: grid; place-items: center;
+    font-size: 80px;
+    position: relative;
+  }
+  .product-ribbon {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: #E62B2B;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    z-index: 2;
+  }
+  .product-ribbon.new { background: #00C2E8; }
+  .product-ribbon.best { background: #FFC72C; color: #1A1A1A; }
+  .product-wishlist {
+    position: absolute;
+    top: 14px; left: 14px;
+    width: 36px; height: 36px;
+    background: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #7A7A7A;
+    transition: color 0.15s;
+    z-index: 2;
+    font-size: 18px;
+  }
+  .product-wishlist:hover { color: #E62B2B; }
+  .product-info { padding: 18px 18px 20px; }
+  .product-cat {
+    font-size: 12px;
+    color: #7A7A7A;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+    color: #1A1A1A;
+  }
+  .product-rating {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: #7A7A7A;
+  }
+  .stars { color: #FFC72C; letter-spacing: 1px; }
+  .product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .price-current { font-weight: 800; font-size: 20px; color: #1A1A1A; }
+  .price-old { font-size: 14px; color: #7A7A7A; text-decoration: line-through; margin-right: 8px; }
+  .add-to-cart {
+    background: #00C2E8;
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .add-to-cart:hover { background: #009BC9; transform: scale(1.08); }
+
+  /* FEATURED PROMO */
+  .featured-banner {
+    background: linear-gradient(135deg, #00C2E8 0%, #009BC9 100%);
+    color: #fff;
+    border-radius: 24px;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .featured-banner::before {
+    content: '';
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  }
+  .featured-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 300px; height: 300px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 50%;
+  }
+  .featured-text { position: relative; z-index: 2; }
+  .featured-tag {
+    display: inline-block;
+    background: #1A1A1A;
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+  }
+  .featured-banner h3 {
+    font-size: 46px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    letter-spacing: -0.8px;
+  }
+  .featured-banner p {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 26px;
+    opacity: 0.95;
+  }
+  .featured-price {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 28px;
+  }
+  .featured-price .now { font-size: 42px; font-weight: 900; }
+  .featured-price .was { font-size: 22px; text-decoration: line-through; opacity: 0.6; }
+  .featured-price .save {
+    background: #1A1A1A;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .btn-primary {
+    background: #1A1A1A;
+    color: #fff;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+  .featured-visual {
+    position: relative;
+    display: grid; place-items: center;
+    font-size: 220px;
+    text-align: center;
+    z-index: 2;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+  }
+
+  /* WHY US */
+  .why-section { background: #fafafa; max-width: none; padding: 70px 24px; }
+  .why-inner { max-width: 1200px; margin: 0 auto; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .why-card {
+    text-align: center;
+    padding: 36px 24px;
+    border-radius: 16px;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #f0f0f0;
+  }
+  .why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    border-color: transparent;
+  }
+  .why-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #00C2E8, #009BC9);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 194, 232, 0.3);
+  }
+  .why-card h4 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: #1A1A1A; }
+  .why-card p { font-size: 14px; color: #4A4A4A; line-height: 1.5; }
+
+  /* TESTIMONIALS */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    position: relative;
+    border: 1px solid #f0f0f0;
+  }
+  .testimonial .quote-mark {
+    position: absolute;
+    top: 20px; left: 24px;
+    font-size: 80px;
+    color: #E5F8FD;
+    font-family: Georgia, serif;
+    line-height: 1;
+    z-index: 0;
+  }
+  .testimonial-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: #4A4A4A;
+    position: relative; z-index: 1;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .author-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00C2E8, #009BC9);
+    color: #fff;
+    display: grid; place-items: center;
+    font-weight: 800;
+    font-size: 18px;
+  }
+  .author-name { font-weight: 700; font-size: 15px; }
+  .author-role { font-size: 12px; color: #7A7A7A; margin-top: 2px; }
+  .author-stars { color: #FFC72C; margin-top: 4px; font-size: 13px; letter-spacing: 1px; }
+
+  /* WHATSAPP FAB */
+  .whatsapp-fab {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 64px; height: 64px;
+    background: #25D366;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+    z-index: 9999;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    font-size: 32px;
+    color: #fff;
+    animation: pulse 2s infinite;
+  }
+  .whatsapp-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+  }
+  .whatsapp-fab::before {
+    content: 'צריך עזרה?';
+    position: absolute;
+    right: 75px;
+    background: #1A1A1A;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Heebo', sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  .whatsapp-fab:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45); }
+    50% { box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45), 0 0 0 12px rgba(37, 211, 102, 0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .featured-banner { grid-template-columns: 1fr; padding: 40px; text-align: center; }
+    .featured-banner h3 { font-size: 34px; }
+    .featured-visual { font-size: 160px; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonial-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .section-head h2 { font-size: 28px; }
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .product-name { font-size: 14px; }
+    .price-current { font-size: 17px; }
+    .why-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    section { padding: 50px 16px; }
+    .featured-banner { padding: 32px 24px; border-radius: 16px; }
+    .featured-banner h3 { font-size: 26px; }
+    .featured-visual { font-size: 100px; }
+    .featured-price .now { font-size: 32px; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .promo-item { font-size: 13px; }
+    .whatsapp-fab { width: 56px; height: 56px; font-size: 28px; bottom: 16px; left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  🚚 <strong>משלוח חינם</strong> מעל 200₪ &nbsp; • &nbsp; ⭐ <strong>4.9 כוכבים</strong> מ-5,000+ שליחים &nbsp; • &nbsp; 💳 <strong>עד 12 תשלומים</strong>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">🚚</div>
+      <div class="trust-text">
+        <div class="t">משלוח מהיר</div>
+        <div class="s">לכל הארץ תוך 1-3 ימים</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡️</div>
+      <div class="trust-text">
+        <div class="t">תשלום מאובטח</div>
+        <div class="s">SSL ו-3D Secure</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">💳</div>
+      <div class="trust-text">
+        <div class="t">תשלום נוח</div>
+        <div class="s">עד 12 תשלומים ללא ריבית</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">💬</div>
+      <div class="trust-text">
+        <div class="t">תמיכה בעברית</div>
+        <div class="s">צ'אט / וואטסאפ / טלפון</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO MARQUEE -->
+<div class="promo-strip">
+  <div class="promo-marquee">
+    <span class="promo-item">⚡ <strong>מבצע השבוע:</strong> 20% הנחה על כל הקסדות</span>
+    <span class="promo-item">🎁 משלוח חינם מעל <strong>200₪</strong></span>
+    <span class="promo-item">⭐ <strong>4.9 כוכבים</strong> מ-5,000+ שליחים</span>
+    <span class="promo-item">💳 תשלום עד <strong>12 תשלומים</strong></span>
+    <span class="promo-item">🔥 <strong>מחירים מיוחדים</strong> לשליחי וולט</span>
+    <span class="promo-item">⚡ <strong>מבצע השבוע:</strong> 20% הנחה על כל הקסדות</span>
+    <span class="promo-item">🎁 משלוח חינם מעל <strong>200₪</strong></span>
+    <span class="promo-item">⭐ <strong>4.9 כוכבים</strong> מ-5,000+ שליחים</span>
+    <span class="promo-item">💳 תשלום עד <strong>12 תשלומים</strong></span>
+    <span class="promo-item">🔥 <strong>מחירים מיוחדים</strong> לשליחי וולט</span>
+  </div>
+</div>
+
+<!-- BEST SELLERS -->
+<section>
+  <div class="section-head">
+    <div class="eyebrow">הכי נמכרים השבוע</div>
+    <h2>המוצרים האהובים על השליחים</h2>
+    <p>אלה המוצרים שאלפי שליחי Wolt בוחרים שוב ושוב</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-ribbon best">הכי נמכר</span>
+        <button class="product-wishlist">♡</button>
+        🪖
+      </div>
+      <div class="product-info">
+        <div class="product-cat">קסדות</div>
+        <div class="product-name">קסדת LS2 FF325 STROBE</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.9 (284)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪450</span><span class="price-old">₪550</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-ribbon new">חדש</span>
+        <button class="product-wishlist">♡</button>
+        🚲
+      </div>
+      <div class="product-info">
+        <div class="product-cat">קסדות</div>
+        <div class="product-name">קסדת LS2 OF610 לאופניים</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.8 (167)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪350</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <button class="product-wishlist">♡</button>
+        🎒
+      </div>
+      <div class="product-info">
+        <div class="product-cat">תיקי משלוחים</div>
+        <div class="product-name">תיק משלוחים גדול וולט</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.9 (412)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪280</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-ribbon">-25%</span>
+        <button class="product-wishlist">♡</button>
+        📱
+      </div>
+      <div class="product-info">
+        <div class="product-cat">אביזרי טלפון</div>
+        <div class="product-name">מתקן טלפון לכידון</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.7 (203)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪95</span><span class="price-old">₪125</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <button class="product-wishlist">♡</button>
+        🧥
+      </div>
+      <div class="product-info">
+        <div class="product-cat">ביגוד</div>
+        <div class="product-name">מכנסי גשם נושמים</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span> 4.5 (89)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪165</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-ribbon new">חדש</span>
+        <button class="product-wishlist">♡</button>
+        🥽
+      </div>
+      <div class="product-info">
+        <div class="product-cat">אביזרים</div>
+        <div class="product-name">בנדנה ספיגת זיעה</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.8 (156)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪25</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-ribbon">-30%</span>
+        <button class="product-wishlist">♡</button>
+        🥾
+      </div>
+      <div class="product-info">
+        <div class="product-cat">חורף</div>
+        <div class="product-name">כיסוי גשם לנעליים</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span> 4.6 (74)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪49</span><span class="price-old">₪70</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <button class="product-wishlist">♡</button>
+        🔋
+      </div>
+      <div class="product-info">
+        <div class="product-cat">אביזרי טלפון</div>
+        <div class="product-name">מטען USB-C לקסדה</div>
+        <div class="product-rating"><span class="stars">★★★★★</span> 4.9 (321)</div>
+        <div class="product-bottom">
+          <div><span class="price-current">₪120</span></div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROMO BANNER -->
+<section>
+  <div class="featured-banner">
+    <div class="featured-text">
+      <span class="featured-tag">🔥 מבצע השבוע — נגמר ביום שישי</span>
+      <h3>קסדת LS2 FF325 STROBE</h3>
+      <p>הקסדה המקצועית הכי נמכרת בקרב שליחי Wolt בישראל. עמידה בגשם, אוורור מצוין, ומשקל קל.</p>
+      <div class="featured-price">
+        <span class="now">₪450</span>
+        <span class="was">₪550</span>
+        <span class="save">חסכון ₪100</span>
+      </div>
+      <a href="#" class="btn-primary">קנה עכשיו ⬅</a>
+    </div>
+    <div class="featured-visual">🪖</div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="section-head">
+      <div class="eyebrow">למה אנחנו</div>
+      <h2>החנות שנבנתה עבור שליחים</h2>
+      <p>הקמנו את Couriers Club כי הבנו ששליחים צריכים יותר ממה שהשוק מציע</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h4>מוצרים שנבחנו בשטח</h4>
+        <p>כל מוצר נבחן על ידי שליחי וולט אמיתיים</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h4>מחירים לשליחים</h4>
+        <p>הנחות בלעדיות 15-25% מתחת לשוק</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h4>משלוח מהיר</h4>
+        <p>1-3 ימי עסקים לכל הארץ</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h4>איכות מובטחת</h4>
+        <p>אחריות יצרן מלאה על כל מוצר</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-head">
+    <div class="eyebrow">המלצות שליחים</div>
+    <h2>5,000+ שליחים מרוצים</h2>
+    <p>מה אומרים השליחים שכבר קנו אצלנו</p>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">קניתי כאן קסדה ותיק. איכות מטורפת, והמחיר היה זול ב-30% ממה שראיתי במקומות אחרים. ממליץ בחום לכל שליח חדש.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">י</div>
+        <div>
+          <div class="author-name">יוסי כהן</div>
+          <div class="author-role">שליח וולט תל אביב</div>
+          <div class="author-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">השירות מעולה. הייתה בעיה עם תיק שקיבלתי וב-2 ימים שלחו לי תיק חדש בלי שום בלגן. ככה זה צריך להיות.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">מ</div>
+        <div>
+          <div class="author-name">מוחמד עלי</div>
+          <div class="author-role">שליח וולט חיפה</div>
+          <div class="author-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">המוצרים פה מותאמים בדיוק לעבודה שלנו. סוף סוף לא צריך לחפש בכמה אתרים. הכל במקום אחד ובמחיר הוגן.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ש</div>
+        <div>
+          <div class="author-name">שירה לוי</div>
+          <div class="author-role">שליחת וולט ירושלים</div>
+          <div class="author-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FAB -->
+<a class="whatsapp-fab" href="https://wa.me/972500000000" target="_blank" rel="noopener" title="צריך עזרה? כתוב לנו בוואטסאפ">💬</a>
+
+<script>
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btn.textContent = '✓';
+      btn.style.background = '#06A35A';
+      setTimeout(() => {
+        btn.textContent = '+';
+        btn.style.background = '';
+      }, 1500);
+    });
+  });
+  document.querySelectorAll('.product-wishlist').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isLiked = btn.textContent === '♥';
+      btn.textContent = isLiked ? '♡' : '♥';
+      btn.style.color = isLiked ? '' : '#E62B2B';
+    });
+  });
+</script>
+</body>
+</html>
